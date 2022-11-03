@@ -1,8 +1,5 @@
 from test_movies.models import Reaction
+import array
 
-
-def get_reactions_from_movie(id):
-    reactions = Reaction.objects.get(movieId=id)
-    return reactions
 
 

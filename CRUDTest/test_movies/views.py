@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
+
+import proyectoa_web.utils
 from .forms import MovieForm
-from .models import Movie
+
+from .models import Movie,Reaction
 from django.contrib import messages
 
 # Create your views here.
@@ -10,7 +13,7 @@ def add(request):
     form = MovieForm(request.POST or None)
     if form.is_valid():
         form.save()
-        return redirect("/show")
+        return redirect("/")
 
     else:
       if request.POST:
@@ -41,4 +44,16 @@ def update(request, id):
     if form.is_valid():
         form.save()
         return redirect("/")
-    return render(request, 'movie_edit.html', {'movie': movie})
+    else:
+        messages.error(request, 'Error in Movie data')
+        form = MovieForm()
+
+    context = {'form': form}
+    return render(request, 'movie_edit.html', context)
+def add_reaction(request,reaction_type,movieId):
+    reaction = Reaction(type=reaction_type,movieId=movieId)
+    reaction.save()
+
+    return redirect("/")
+
+

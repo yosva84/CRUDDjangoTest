@@ -2,7 +2,9 @@
 
 
 {% block content %}
+    </br>
     <div class="container"><a href="/add" class="btn btn-primary">Add New Movie</a></div>
+    </br>
     <table class="table table-striped table-bordered table-sm">
     <thead class="thead-dark">
     <tr>
@@ -11,6 +13,7 @@
         <th>Url</th>
         <th>Language</th>
         <th>Summary</th>
+        <th>Rating</th>
         <th>Actions</th>
         <th>Reactions</th>
     </tr>
@@ -20,24 +23,27 @@
     <tr>
         <td><img src='{{ movie.image }}' height="100"/></td>
         <td>{{ movie.name }}</td>
-        <td>{{ movie.url }}</td>
+        <td><a href="{{ movie.url }}">{{ movie.url }}</a></td>
         <td>{{ movie.language }}</td>
         <td>{{ movie.summary }}</td>
+        <td><b>{{ movie.getRating }}</b></td>
         <td>
             <a href="/edit/{{ movie.id }}"><span class="glyphicon glyphicon-pencil" >Edit</span></a>
             <a href="/delete/{{ movie.id }}"><span class="glyphicon glyphicon-trash" >Remove</span></a>
         </td>
         <td>
-            <i class="bi bi-emoji-smile">0</i>
-            <i class="bi bi-emoji-heart-eyes">0</i>
-            <i class="bi bi-emoji-neutral">0</i>
-            <i class="bi bi-emoji-laughing">0</i>
-            <i class="bi bi-emoji-dizzy">0</i>
-            <i class="bi bi-emoji-frown">0</i>
-            <i class="bi bi-emoji-angry">0</i>
+            <i class="bi bi-emoji-smile"></i><a href="/add_reaction/like/{{ movie.id }}"><sub>{{ movie.getLikes}}</sub></a>
+            <i class="bi bi-emoji-heart-eyes"></i><a href="/add_reaction/love/{{ movie.id }}"><sub>{{ movie.getLoves}}</sub></a>
+            <i class="bi bi-emoji-neutral"></i><a href="/add_reaction/care/{{ movie.id }}"><sub>{{ movie.getCare}}</sub></a>
+            </br>
+            <i class="bi bi-emoji-laughing"></i><a href="/add_reaction/haha/{{ movie.id }}"><sub>{{ movie.getHaha}}</sub></a>
+            <i class="bi bi-emoji-dizzy"></i><a href="/add_reaction/wow/{{ movie.id }}"><sub>{{ movie.getWow}}</sub></a>
+            <i class="bi bi-emoji-frown"></i><a href="/add_reaction/sad/{{ movie.id }}"><sub>{{ movie.getSad}}</sub></a>
+            <i class="bi bi-emoji-angry"></i><a href="/add_reaction/angry/{{ movie.id }}"><sub>{{ movie.getAngry}}</sub></a>
         </td>
     </tr>
 {% endfor %}
     </tbody>
 </table>
+
 {% endblock %}
